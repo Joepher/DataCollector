@@ -12,6 +12,7 @@ import com.mapfinger.joepher.datacollector.R;
 
 /**
  * Created by Joepher on 2015/4/23.
+ * Not used any more. Replaced by BDLocationService.
  */
 public class BDLocationActivity extends Activity {
 	private LocationClient locationClient;

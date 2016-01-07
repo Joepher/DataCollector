@@ -3,7 +3,8 @@ package com.mapfinger.joepher.datacollector.executor;
 import android.content.Context;
 
 
-import com.mapfinger.joepher.datacollector.entity.LocationData;
+// import com.mapfinger.joepher.datacollector.entity.LocationData;
+import com.mapfinger.joepher.datacollector.entity.TransferUnit;
 import com.mapfinger.joepher.datacollector.log.MyLog;
 import com.mapfinger.joepher.datacollector.service.DataTransferService;
 import com.mapfinger.joepher.datacollector.service.NetworkConnectivity;
@@ -14,16 +15,20 @@ import java.util.Vector;
  * Created by Joepher on 2015/5/9.
  */
 public class LocationDataExecutor implements Runnable {
-	private LocationData dataToSend;
-	private Vector<LocationData> dataQueue;
+	// private LocationData dataToSend;
+	private TransferUnit dataToSend;
+	// private Vector<LocationData> dataQueue;
+	private Vector<TransferUnit> dataQueue;
 	private DataTransferService dataTransferService;
 	private NetworkConnectivityExecutor networkConnectivityExecutor;
 
 	private static final int SEND_DURATION = 5000;
 
 	public LocationDataExecutor(Context context) {
-		this.dataToSend = new LocationData();
-		this.dataQueue = new Vector<LocationData>();
+		// this.dataToSend = new LocationData();
+		this.dataToSend = new TransferUnit();
+		// this.dataQueue = new Vector<LocationData>();
+		this.dataQueue = new Vector<TransferUnit>();
 		this.dataTransferService = new DataTransferService();
 		this.networkConnectivityExecutor = new NetworkConnectivityExecutor(context);
 		new Thread(networkConnectivityExecutor).start();
@@ -34,7 +39,8 @@ public class LocationDataExecutor implements Runnable {
 		doTransferLocationData();
 	}
 
-	public boolean addLocationdata(LocationData locationData) {
+	// public boolean addLocationdata(LocationData locationData) {
+	public boolean addLocationdata(TransferUnit locationData) {
 		synchronized (dataQueue) {
 			dataQueue.add(locationData);
 			dataQueue.notifyAll();

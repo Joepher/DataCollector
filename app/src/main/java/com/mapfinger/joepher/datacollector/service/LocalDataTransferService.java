@@ -1,8 +1,8 @@
 package com.mapfinger.joepher.datacollector.service;
 
-import android.os.Environment;
-
-import com.mapfinger.joepher.datacollector.entity.LocationData;
+import com.mapfinger.joepher.datacollector.entity.Config;
+// import com.mapfinger.joepher.datacollector.entity.LocationData;
+import com.mapfinger.joepher.datacollector.entity.TransferUnit;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,25 +17,24 @@ import java.util.List;
  * Created by Joepher on 2015/11/3.
  */
 public class LocalDataTransferService {
-	private String home;
-
-	private List<LocationData> locationDatas;
+	// private List<LocationData> locationDatas;
+	private List<TransferUnit> locationDatas;
 
 	private static final int MINPTS = 12;
 
 	public LocalDataTransferService() {
 		this.locationDatas = new ArrayList<>();
-		this.home = Environment.getExternalStorageDirectory().getPath() + "/mapfinger";
-		this.home = getHome();
 	}
 
-	public void sendData(LocationData locationData) {
+	// public void sendData(LocationData locationData) {
+	public void sendData(TransferUnit locationData) {
 		//persistanceWithBuffer(locationData);
 		persistance(locationData);
 	}
 
-	private void persistance(LocationData locationData) {
-		String filepath = this.home + getFileName();
+	// private void persistance(LocationData locationData) {
+	private void persistance(TransferUnit locationData) {
+		String filepath = Config.getHomePath() + getFileName();
 		File file = new File(filepath);
 
 		try {
@@ -50,11 +49,12 @@ public class LocalDataTransferService {
 		}
 	}
 
-	private void persistanceWithBuffer(LocationData locationData) {
+	// private void persistanceWithBuffer(LocationData locationData) {
+	private void persistanceWithBuffer(TransferUnit locationData) {
 		locationDatas.add(locationData);
 
 		if (locationDatas.size() == MINPTS) {
-			String filepath = this.home + getFileName();
+			String filepath = Config.getHomePath() + getFileName();
 			File file = new File(filepath);
 
 			try {
@@ -73,15 +73,6 @@ public class LocalDataTransferService {
 			locationDatas.clear();
 		}
 
-	}
-
-	private String getHome() {
-		File file = new File(home);
-		if (!file.exists()) {
-			file.mkdir();
-		}
-
-		return home;
 	}
 
 	private String getFileName() {

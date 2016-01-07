@@ -4,22 +4,33 @@ import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
 
 import java.util.Hashtable;
+
 /**
- * Created by Joepher on 2015/5/11.
+ * Created by Administrator on 2016/1/7.
  */
-public class LocationData implements KvmSerializable {
+public class TransferUnit implements KvmSerializable {
+	private String userId;
 	private String timeline;
 	private String latitude;
 	private String longitude;
 	private String accuracy;
 	private String address;
 
-	public LocationData() {
+	public TransferUnit() {
+		this.userId = "";
 		this.timeline = "";
 		this.latitude = "";
 		this.longitude = "";
 		this.accuracy = "";
 		this.address = "";
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getTimeline() {
@@ -46,7 +57,6 @@ public class LocationData implements KvmSerializable {
 		this.longitude = longitude;
 	}
 
-
 	public String getAccuracy() {
 		return accuracy;
 	}
@@ -54,7 +64,6 @@ public class LocationData implements KvmSerializable {
 	public void setAccuracy(String accuracy) {
 		this.accuracy = accuracy;
 	}
-
 
 	public String getAddress() {
 		return address;
@@ -65,31 +74,34 @@ public class LocationData implements KvmSerializable {
 	}
 
 	public String info() {
-		return timeline + "," + longitude + "," + latitude + "," + accuracy + "," + address;
+		return userId + "," + timeline + "," + longitude + "," + latitude + "," + accuracy + "," + address;
 	}
 
 	@Override
 	public String toString() {
-		return "LocationData{" +
-				"timeline='" + timeline + '\'' +
+		return "TransferUnit{" +
+				"userId='" + userId + '\'' +
+				", timeline='" + timeline + '\'' +
 				", latitude='" + latitude + '\'' +
 				", longitude='" + longitude + '\'' +
 				", accuracy='" + accuracy + '\'' +
 				", address='" + address + '\'' +
-				"}";
+				'}';
 	}
 
 	@Override
 	public Object getProperty(int i) {
 		if (i == 0) {
-			return getTimeline();
+			return getUserId();
 		} else if (i == 1) {
-			return getLatitude();
+			return getTimeline();
 		} else if (i == 2) {
-			return getLongitude();
+			return getLatitude();
 		} else if (i == 3) {
-			return getAccuracy();
+			return getLongitude();
 		} else if (i == 4) {
+			return getAccuracy();
+		} else if (i == 5) {
 			return getAddress();
 		} else {
 			return null;
@@ -98,20 +110,22 @@ public class LocationData implements KvmSerializable {
 
 	@Override
 	public int getPropertyCount() {
-		return 5;
+		return 6;
 	}
 
 	@Override
 	public void setProperty(int i, Object o) {
 		if (i == 0) {
-			setTimeline((String) o);
+			setUserId((String) o);
 		} else if (i == 1) {
-			setLatitude((String) o);
+			setTimeline((String) o);
 		} else if (i == 2) {
-			setLongitude((String) o);
+			setLatitude((String) o);
 		} else if (i == 3) {
-			setAccuracy((String) o);
+			setLongitude((String) o);
 		} else if (i == 4) {
+			setAccuracy((String) o);
+		} else if (i == 5) {
 			setAddress((String) o);
 		}
 	}
@@ -119,14 +133,16 @@ public class LocationData implements KvmSerializable {
 	@Override
 	public void getPropertyInfo(int i, Hashtable hashtable, PropertyInfo propertyInfo) {
 		if (i == 0) {
-			propertyInfo.name = "timeline";
+			propertyInfo.name = "userid";
 		} else if (i == 1) {
-			propertyInfo.name = "latitude";
+			propertyInfo.name = "timeline";
 		} else if (i == 2) {
-			propertyInfo.name = "longitude";
+			propertyInfo.name = "latitude";
 		} else if (i == 3) {
-			propertyInfo.name = "accuracy";
+			propertyInfo.name = "longitude";
 		} else if (i == 4) {
+			propertyInfo.name = "accuracy";
+		} else if (i == 5) {
 			propertyInfo.name = "address";
 		} else {
 			return;
@@ -134,4 +150,5 @@ public class LocationData implements KvmSerializable {
 
 		propertyInfo.type = String.class;
 	}
+
 }

@@ -14,12 +14,14 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+
 import com.mapfinger.joepher.datacollector.R;
 import com.mapfinger.joepher.datacollector.activity.LocatingActivity;
-import com.mapfinger.joepher.datacollector.entity.LocationData;
+// import com.mapfinger.joepher.datacollector.entity.LocationData;
+import com.mapfinger.joepher.datacollector.entity.Config;
+import com.mapfinger.joepher.datacollector.entity.TransferUnit;
 import com.mapfinger.joepher.datacollector.executor.LocalLocationDataExecutor;
 import com.mapfinger.joepher.datacollector.log.MyLog;
-
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -37,7 +39,8 @@ public class BDLocationService extends Service {
 	private LocationClient locationClient;
 	private BDLocationListener locationListener;
 	private LocalLocationDataExecutor localLocationDataExecutor;
-	private LocationData locationData;
+	// private LocationData locationData;
+	private TransferUnit locationData;
 	private LocationMode locationMode = LocationMode.Hight_Accuracy;
 
 	private PowerManager.WakeLock wakeLock;
@@ -98,7 +101,8 @@ public class BDLocationService extends Service {
 		locationListener = new MyLocationListener();
 		locationClient.registerLocationListener(locationListener);
 		localLocationDataExecutor = new LocalLocationDataExecutor();
-		locationData = new LocationData();
+		// locationData = new LocationData();
+		locationData = new TransferUnit();
 
 		locData = LocatingActivity.locData;
 
@@ -243,6 +247,7 @@ public class BDLocationService extends Service {
 			}
 
 			String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+			locationData.setUserId(Config.getUserId());
 			locationData.setTimeline(time);
 			locationData.setLongitude(bdLocation.getLongitude() + "");
 			locationData.setLatitude(bdLocation.getLatitude() + "");

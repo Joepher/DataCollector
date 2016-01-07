@@ -1,7 +1,7 @@
 package com.mapfinger.joepher.datacollector.service;
 
-
-import com.mapfinger.joepher.datacollector.entity.LocationData;
+// import com.mapfinger.joepher.datacollector.entity.LocationData;
+import com.mapfinger.joepher.datacollector.entity.TransferUnit;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -33,7 +33,8 @@ public class DataTransferService {
 		envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 	}
 
-	public int sendData(LocationData locationData) {
+	// public int sendData(LocationData locationData) {
+	public int sendData(TransferUnit locationData) {
 		if (locationData != null) {
 			request.addProperty("arg0", locationData);
 			envelope.bodyOut = request;

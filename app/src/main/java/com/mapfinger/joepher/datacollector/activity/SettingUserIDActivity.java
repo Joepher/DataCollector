@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mapfinger.joepher.datacollector.R;
-import com.mapfinger.joepher.datacollector.bdlocation.BDLocationActivity;
+import com.mapfinger.joepher.datacollector.entity.Config;
 
 /**
  * Created by Joepher on 2015-12-13.
@@ -17,7 +17,7 @@ import com.mapfinger.joepher.datacollector.bdlocation.BDLocationActivity;
 public class SettingUserIDActivity extends Activity implements View.OnClickListener {
 	private TextView tv_userid;
 	private Button btn_seeting;
-	public static String userId;
+	private String userId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class SettingUserIDActivity extends Activity implements View.OnClickListe
 		switch (v.getId()) {
 			case R.id.btn_seeting:
 				if (authCheck()) {
+					Config.saveUserId(userId);
 					doLocation();
 				}
 				break;
@@ -43,6 +44,8 @@ public class SettingUserIDActivity extends Activity implements View.OnClickListe
 	private boolean authCheck() {
 		getUserId();
 
+		// 考虑到老年人操作的便捷性，此处不做用户验证，仅依赖用户设置正确性。(老板的意思)
+		// 如需添加用户权限验证，在此处做相应修改。
 		if (userId != null && !"".equals(userId)) {
 			return true;
 		} else {

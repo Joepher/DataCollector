@@ -1,6 +1,7 @@
 package com.mapfinger.joepher.datacollector.executor;
 
-import com.mapfinger.joepher.datacollector.entity.LocationData;
+// import com.mapfinger.joepher.datacollector.entity.LocationData;
+import com.mapfinger.joepher.datacollector.entity.TransferUnit;
 import com.mapfinger.joepher.datacollector.service.LocalDataTransferService;
 
 import java.util.Vector;
@@ -8,7 +9,8 @@ import java.util.Vector;
  * Created by Joepher on 2015/11/3.
  */
 public class LocalLocationDataExecutor implements Runnable {
-	private Vector<LocationData> dataQueue;
+	// private Vector<LocationData> dataQueue;
+	private Vector<TransferUnit> dataQueue;
 	private LocalDataTransferService service;
 
 	public LocalLocationDataExecutor() {
@@ -16,7 +18,8 @@ public class LocalLocationDataExecutor implements Runnable {
 		this.service = new LocalDataTransferService();
 	}
 
-	public boolean addLocationdata(LocationData locationData) {
+	// public boolean addLocationdata(LocationData locationData) {
+	public boolean addLocationdata(TransferUnit locationData) {
 		synchronized (dataQueue) {
 			dataQueue.add(locationData);
 			dataQueue.notifyAll();

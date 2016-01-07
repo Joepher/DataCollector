@@ -52,17 +52,21 @@
         <meta-data android:name="com.baidu.lbsapi.API_KEY"
                    android:value="B9yR2Prj45vCZ4XipVWHTPDV"/>
 
-        <activity
-            android:name=".activity.SettingUserIDActivity"
-            android:label="@string/app_name">
+        <activity android:name=".activity.MainActivity"
+                  android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.SettingUserIDActivity"
+            android:label="@string/app_name">
+        </activity>
+
         <activity android:name=".activity.LocatingActivity"
-                  android:label="@string/data_name">
+                  android:label="@string/app_name">
         </activity>
     </application>
 
